@@ -14,7 +14,6 @@ for _ in range(T):
     time_list = list(time_list[:-1].split(' '))
     r_list =[]
     for i in time_list:
-
         hh = i[:2]
         mm = i[3:]
         h_angle = float((int(hh)%12)*30) + 0.5*float(mm)
