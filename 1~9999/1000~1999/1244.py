@@ -17,8 +17,14 @@ for _ in range(case):
         dist = min(num,length - num+1)
         switch[num] = (switch[num] + 1) % 2
         for i in range(1,dist):
-            if switch[num+i] ==  switch[num-i]:
+            if switch[num+i] == switch[num-i]:
                 switch[num+i] = (switch[num+i]+1)%2
                 switch[num-i] = (switch[num-i]+1)%2
+            else:
+                break
 for  i in range(1, length+1):
     print(switch[i],end=' ')
+    if i%20==0:
+        print()
+
+
