@@ -1,33 +1,34 @@
-def BFS(n,k):
-    global visited
+import sys
+input= sys.stdin.readline
+def BFS():
+    global n
+    global k
+    global visited_dict
     depth = 0
-    visited.append((n))
-    depth_dict=dict({0:[n]})
-    while True:
-        t_list = depth_dict[depth]
-        n_list =[]
-        depth += 1
-        for t in t_list:
-            a = t - 1
-            b = t + 1
-            c = t * 2
-            if a == k or b == k or c ==k:
-                print(depth_dict)
-                return depth
-            if a not in visited and a>=0 and a<=100000:
-                visited.append(a)
-                n_list.append(a)
-            if b not in visited and b>=0 and b<=100000:
-                visited.append(b)
-                n_list.append(b)
-            if c not in visited and c>=0 and c<=100000:
-                visited.append(c)
-                n_list.append(c)
-        depth_dict[depth] = n_lis]
+    queue= [n-1,n+1,n*2]
+    while k not in queue:
+        depth +=1
+        next_queue =[]
+        for i in queue:
+            if i not in visited_dict:
+                if i>=0 and i<=100000:
+                    visited_dict[i] =depth
+                    next_queue.append(i-1)
+                    next_queue.append(i+1)
+                    next_queue.append(i*2)
+            else:
+                if visited_dict[i] > depth:
+                    visited_dict[i]= depth
+                    next_queue.append(i - 1)
+                    next_queue.append(i + 1)
+                    next_queue.append(i * 2)
+        queue = next_queue[:]
+    return depth
 
-n,k = map(int,input().split())
-visited = []
-if n<k:
-    print(BFS(n,k))
-else:
-    print(n-k)
+
+n, k = map(int,input().split())
+if n>k:
+    n,k=k,n
+visited_dict = {n:0}
+print(BFS()+1)
+

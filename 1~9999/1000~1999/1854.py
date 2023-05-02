@@ -13,8 +13,6 @@ for i in range(m):
     near_list[a].append([b,c])
 
 def DFS(now, distance):
-    if distance in dist[now]:
-        return
     if len(dist[now]) >=k:
         m_value = max(dist[now])
         if distance>m_value:
@@ -23,7 +21,8 @@ def DFS(now, distance):
             dist[now].remove(m_value)
     dist[now].append(distance)
     for i in near_list[now]:
-        DFS(i[0],distance+i[1])
+        if (distance + i[1]) not in dist[now]:
+            DFS(i[0],distance+i[1])
 
 DFS(1,0)
 for i in range(1,n+1):
