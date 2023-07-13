@@ -18,7 +18,24 @@
 2. n-1 자리수 1의 합
 3. n자리 부터 K까지 자리 수의 합
 """
+one_count = [int(2**(n-1) + 2**(n-2) * (n-1)) for n in range(40)]
+print(one_count)
+
 def cal_one(x):
+    global one_count
+    b_num = []
+    i = 0
+    while x//2 != 0 or x%2 != 0:
+        b_num.insert(0,(x%2))
+        x=x//2
+        i += 1
+    if len(b_num) == 0:
+        b_num.append(0)
+        i = 1
+    result = sum(one_count[:i])
+    print(result)
+    #for i in range(len(b_num)):
 
-
+    return result
 a,b = map(int,input().split())
+print(cal_one(b)-cal_one(a-1))
