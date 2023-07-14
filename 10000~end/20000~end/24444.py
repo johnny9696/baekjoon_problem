@@ -14,17 +14,16 @@ for _ in range(m):
 
 dq = deque()
 dq.append(r)
-j=2
-visited[r] = 1
+j=1
 while dq:
     now = dq.popleft()
     if visited[now] == 0 :
         visited[now] = j
         j += 1
-    near_list[now].sort()
-    for i in near_list[now]:
-        if visited[i] == 0:
-            dq.append(i)
+        near_list[now].sort()
+        for i in near_list[now]:
+            if visited[i] == 0:
+                dq.append(i)
 
 
 for i in range(1, n+1):
