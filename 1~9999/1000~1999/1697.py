@@ -1,34 +1,28 @@
 import sys
-input= sys.stdin.readline
-def BFS():
-    global n
-    global k
-    global visited_dict
-    depth = 0
-    queue= [n-1,n+1,n*2]
-    while k not in queue:
-        depth +=1
-        next_queue =[]
-        for i in queue:
-            if i not in visited_dict:
-                if i>=0 and i<=100000:
-                    visited_dict[i] =depth
-                    next_queue.append(i-1)
-                    next_queue.append(i+1)
-                    next_queue.append(i*2)
-            else:
-                if visited_dict[i] > depth:
-                    visited_dict[i]= depth
-                    next_queue.append(i - 1)
-                    next_queue.append(i + 1)
-                    next_queue.append(i * 2)
-        queue = next_queue[:]
-    return depth
+from collections import deque
+s,e = map(int,input().split())
 
 
-n, k = map(int,input().split())
-if n>k:
-    n,k=k,n
-visited_dict = {n:0}
-print(BFS()+1)
+visit_time = [sys.maxsize for _ in range(100001)]
 
+dq = deque()
+dq.append(s)
+visit_time[s] = 0
+move = [-1,1]
+while dq :
+    now = dq.popleft()
+    for m in move :
+        next_p = now + m
+        if 0<= next_p <=100000:
+            if visit_time[next_p] > visit_time[now] + 1:
+                visit_time[next_p] = visit_time[now] + 1
+                if next_p != e:
+                    dq.append(next_p)
+    next_p = now * 2
+    if 0 <= next_p <= 100000:
+        if visit_time[next_p] > visit_time[now] + 1:
+            visit_time[next_p] = visit_time[now] + 1
+            if next_p != e:
+                dq.append(next_p)
+
+print(visit_time[e])
